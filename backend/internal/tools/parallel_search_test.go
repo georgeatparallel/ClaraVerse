@@ -199,7 +199,11 @@ func TestParallelSearchLive(t *testing.T) {
 			t.Errorf("unexpected live request: %s, User-Agent=%s", r.URL, r.UserAgent())
 		}
 		t.Logf("%s %s User-Agent=%s", r.Method, r.URL, r.UserAgent())
-		return original.RoundTrip(r)
+		response, err := original.RoundTrip(r)
+		if response != nil {
+			t.Logf("UTC=%s status=%d Retry-After=%q Date=%q", time.Now().UTC().Format(time.RFC3339), response.StatusCode, response.Header.Get("Retry-After"), response.Header.Get("Date"))
+		}
+		return response, err
 	})
 	result, err := GetRegistry().Execute("search_web", map[string]interface{}{"query": "Go programming language release notes"})
 	if err != nil {
