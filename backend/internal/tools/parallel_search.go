@@ -93,5 +93,7 @@ func executeParallelSearch(ctx context.Context, query string, args map[string]in
 	if output == "" {
 		return "", fmt.Errorf("Parallel web search returned no text content")
 	}
-	return output, nil
+	// Workflow tool blocks automatically decode JSON-looking strings. Keep the
+	// search_web text contract even when MCP returns JSON inside TextContent.
+	return "Parallel search results:\n\n" + output, nil
 }
