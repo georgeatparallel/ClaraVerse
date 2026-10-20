@@ -4,12 +4,15 @@ The built-in `search_web` tool uses **SearXNG** by default. Existing
 `SEARXNG_URL` and `SEARXNG_URLS` settings keep working, including load balancing
 and the search cache.
 
-To use hosted search without running SearXNG, set this in the backend environment
+To use hosted web search, set this in the backend environment
 (or the root `.env` file for Docker Compose), then restart the backend:
 
 ```dotenv
 SEARCH_PROVIDER=parallel
 ```
+
+This setting switches `search_web` only. Existing Docker Compose services and
+their dependencies remain in the stack, and image search still uses SearXNG.
 
 [Parallel Search MCP](https://docs.parallel.ai/integrations/mcp/search-mcp)
 provides free web search using Fast mode, with no account or API key required.
