@@ -131,7 +131,7 @@ func TestSearchProviderErrors(t *testing.T) {
 	for _, tc := range []struct{ name, response, want string }{
 		{"tool error", `{"isError":true,"content":[{"type":"text","text":"quota exceeded"}]}`, "quota exceeded"},
 		{"empty", `{"content":[]}`, "no text content"},
-		{"malformed", `{broken`, "Parallel web search"},
+		{"malformed", `{broken`, "parallel web search"},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			t.Setenv("SEARCH_PROVIDER", "parallel")

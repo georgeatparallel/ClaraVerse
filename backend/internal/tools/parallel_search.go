@@ -56,7 +56,7 @@ func executeParallelSearch(ctx context.Context, query string, args map[string]in
 		}
 	}
 	if !found {
-		return "", fmt.Errorf("Parallel Search MCP does not expose web_search")
+		return "", fmt.Errorf("parallel Search MCP does not expose web_search")
 	}
 
 	// The application owns conversation IDs. Derive an opaque, stable UUID from
@@ -75,7 +75,7 @@ func executeParallelSearch(ctx context.Context, query string, args map[string]in
 		},
 	})
 	if err != nil {
-		return "", fmt.Errorf("Parallel web search: %w", err)
+		return "", fmt.Errorf("parallel web search: %w", err)
 	}
 
 	// Preserve the server's titles, excerpts and source URLs for the existing
@@ -88,10 +88,10 @@ func executeParallelSearch(ctx context.Context, query string, args map[string]in
 	}
 	output := strings.Join(text, "\n\n")
 	if result.IsError {
-		return "", fmt.Errorf("Parallel web search failed: %s", output)
+		return "", fmt.Errorf("parallel web search failed: %s", output)
 	}
 	if output == "" {
-		return "", fmt.Errorf("Parallel web search returned no text content")
+		return "", fmt.Errorf("parallel web search returned no text content")
 	}
 	// Workflow tool blocks automatically decode JSON-looking strings. Keep the
 	// search_web text contract even when MCP returns JSON inside TextContent.
